@@ -1,7 +1,10 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    dalli (1.0.5)
     rack (1.3.1)
+    rack-cache (1.0.2)
+      rack (>= 0.4)
     rmagick (2.13.1)
     sinatra (1.2.6)
       rack (~> 1.1)
@@ -12,5 +15,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dalli
+  rack-cache
   rmagick
   sinatra
