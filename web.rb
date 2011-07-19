@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'rack-cache'
 require 'dalli'
-require 'rmagick'
+require 'RMagick'
 require 'net/http'
 
 use Rack::Cache,
