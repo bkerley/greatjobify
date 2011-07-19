@@ -1,6 +1,5 @@
-require 'rack'
-use Rack::ContentLength
+require 'sinatra'
 
-run(proc do
-  [ 200, { 'Content-type'=>'text/plain'}, ['hi']]
-end)
+get '/' do
+  'hi2u'
+end
