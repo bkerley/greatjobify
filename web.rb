@@ -4,12 +4,22 @@ require 'dalli'
 require 'RMagick'
 require 'net/http'
 
+memcache_address = ENV['MEMCACHIER_SERVERS'] || 'localhost:11211'
+memcache = [
+            memcache_address,
+            {
+              username: ENV['MEMCACHIER_USERNAME'] || nil,
+              password: ENV['MEMCACHIER_PASSWORD'] || nil
+            }
+            ]
+dalli = Dalli::Client.new memcache
+
 use Rack::Cache,
-  :metastore   => 'memcached://localhost:11211/meta',
-  :entitystore => 'memcached://localhost:11211/body'
+  :metastore   => dalli,
+  :entitystore => dalli
 
 configure do
-  set :cache, Dalli::Client.new
+  set :cache, dalli
 
   GREAT_JOB = Magick::Image.read('./static/GreatJob.gif').first
 end
