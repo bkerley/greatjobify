@@ -2,7 +2,7 @@ require 'sinatra'
 require 'rack-cache'
 require 'dalli'
 require 'RMagick'
-require 'net/http'
+require 'excon'
 
 use Rack::Cache,
   :metastore   => 'memcached://localhost:11211/meta',
@@ -28,8 +28,7 @@ get %r{/gj/(.+)} do
   cache_control :public, :max_age => 36000
   etag Digest::SHA1.hexdigest(url_string)
 
-  url = URI.parse(url_string)
-  image = fetch(url)
+  image = fetch(url_string)
   great_job = greatjobify(image)
 
 
@@ -39,7 +38,7 @@ end
 
 helpers do
   def fetch(url)
-    return Net::HTTP.get(url)
+    return Excon.get(url).body
   end
 
   def greatjobify(image)
