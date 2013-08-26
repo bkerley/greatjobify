@@ -1,7 +1,8 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'rack-cache'
 gem 'dalli'
 gem 'rmagick'
-gem 'thin'
+gem 'unicorn'
+gem 'excon'
