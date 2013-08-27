@@ -12,7 +12,7 @@ memcache = [
               password: ENV['MEMCACHIER_PASSWORD'] || nil
             }
             ]
-dalli = Dalli::Client.new memcache
+dalli = Dalli::Client.new *memcache
 
 use Rack::Cache,
   :metastore   => dalli,
