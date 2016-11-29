@@ -28,8 +28,12 @@ get '/' do
   'hi2u'
 end
 
-get %r{/gj/(.+)} do
-  url_string = params[:captures].first
+get %r{/gj/*} do
+  content_type 'text/plain'
+  url_string = env['PATH_INFO'].
+                sub(%r{^/gj/}, '')
+  url_string[%r{https?:(/)[^/]}, 1] = '//'
+
   unless request.query_string.empty?
     url_string << '?'
     url_string << request.query_string
