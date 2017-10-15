@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "9292:9292"
+    depends_on:
+      - memcached
+    environment:
+      - MEMCACHIER_SERVERS=memcached
+  memcached:
+    image: memcached
